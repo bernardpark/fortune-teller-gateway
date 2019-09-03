@@ -1,0 +1,22 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      routes:
+      - id: fortune_teller_ui
+        uri: http://bpark-fortune-ui.apps.pcfone.io
+        predicates:
+        - Path=/ui/**
+      - id: fortune_teller_api
+        uri: http://bpark-fortune-service.apps.pcfone.io
+        predicates:
+        - Path=/api/**
+        filters:
+        - RewritePath=/api/(?<path>.*), /$\{path}
+    
+---
+spring:
+  profiles: cloud
+server:
+  port: ${vcap.application.port:8080}
