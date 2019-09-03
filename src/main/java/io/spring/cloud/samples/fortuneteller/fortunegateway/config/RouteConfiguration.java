@@ -11,14 +11,13 @@ public class RouteConfiguration {
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
-				.route("fortune_teller_ui", r -> r
-						.path("/ui/**")
-						.filters(f -> f.rewritePath("/ui/(?<path>.*)", "/$\\{path}"))
-						.uri("http://bpark-fortune-ui.apps.pcfone.io"))
 				.route("fortune_teller_api", r -> r
 						.path("/api/**")
 						.filters(f -> f.rewritePath("/api/(?<path>.*)", "/$\\{path}"))
 						.uri("http://bpark-fortune-api.apps.pcfone.io"))
+				.route("fortune_teller_ui", r -> r
+						.path("/**")
+						.uri("http://bpark-fortune-ui.apps.pcfone.io"))
 				.build();
 	}
 }
