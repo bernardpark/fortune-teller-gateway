@@ -34,6 +34,7 @@ Examine the manifest.yml file to review the application deployment configuration
 
 ### Test redirection to the UI
 1. Visit `https://$YOUR_GATEWAY_ENDPOINT`
+1. Authenticate with `user` and `$PASSWORD` which you can find from your logs (i.e. `Using generated security password: xyz...`)
 1. Notice the redirect to `https://$YOUR_UI_ENDPOINT`
 
 ### Test redirection to the service
