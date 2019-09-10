@@ -3,9 +3,9 @@ package io.spring.cloud.samples.fortuneteller.fortunegateway.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-@ConfigurationProperties(prefix = "url")
-@RefreshScope
-public class PropertyConfiguration {
+//@ConfigurationProperties(prefix = "url")
+//@RefreshScope
+public class GatewayProperties {
 
 	private String apiURL = "http://fortune-api";
 	private String uiURL = "http://fortune-ui";
