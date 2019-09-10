@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties(PropertyConfiguration.class)
+@EnableConfigurationProperties(GatewayProperties.class)
 public class RouteConfiguration {
 
 	@Autowired
-	PropertyConfiguration propertyConfiguration;
+	GatewayProperties gatewayProperties;
 	
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
@@ -20,10 +20,10 @@ public class RouteConfiguration {
 				.route("fortune_teller_api", r -> r
 						.path("/api/**")
 						.filters(f -> f.rewritePath("/api/(?<path>.*)", "/$\\{path}"))
-						.uri(propertyConfiguration.getApiURL()))
+						.uri(gatewayProperties.getApiURL()))
 				.route("fortune_teller_ui", r -> r
 						.path("/**")
-						.uri(propertyConfiguration.getUiURL()))
+						.uri(gatewayProperties.getUiURL()))
 				.build();
 	}
 	

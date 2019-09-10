@@ -64,7 +64,6 @@ if [[ $CF_API == *"api.run.pivotal.io"* ]]; then
 # Uncomment the following section if you'd like to use PCF managed DB.
     cf create-service p-config-server trial $CONFIGSERVER -c '{"git": { "uri": "https://github.com/bernardpark/fortune-teller-config", "label": "master" } }'
     cf create-service p-service-registry trial $SERVICEREGISTRY
-    cf create-service p-circuit-breaker-dashboard trial $CIRCUITBREAKER
     cf create-service cloudamqp lemur $CLOUDBUS
 else
     if [ ! -z "`cf m | grep "p-config-server"`" ]; then
@@ -82,7 +81,6 @@ else
     echo "$config_json"
     cf cs $service_name standard $CONFIGSERVER -c "$config_json"
     cf cs p-service-registry standard $SERVICEREGISTRY
-    cf cs p-circuit-breaker-dashboard standard $CIRCUITBREAKER
     cf create-service p.rabbitmq single-node-3.7 $CLOUDBUS
 fi
 
@@ -90,7 +88,6 @@ fi
 echo "app_prefix: $APPPREFIX" > vars.yml
 echo "config_server: $CONFIGSERVER" >> vars.yml
 echo "service_registry: $SERVICEREGISTRY" >> vars.yml
-echo "circuit_breaker: $CIRCUITBREAKER" >> vars.yml
 echo "cloud_bus: $CLOUDBUS" >> vars.yml
 echo "cf_trust_certs: $CF_API" >> vars.yml
 

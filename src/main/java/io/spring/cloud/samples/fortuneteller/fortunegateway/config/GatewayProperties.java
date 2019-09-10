@@ -5,7 +5,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 @ConfigurationProperties(prefix = "url")
 @RefreshScope
-public class PropertyConfiguration {
+public class GatewayProperties {
 
 	private String apiURL = "http://fortune-api";
 	private String uiURL = "http://fortune-ui";
