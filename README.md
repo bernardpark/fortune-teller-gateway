@@ -144,7 +144,7 @@ Examine the manifest.yml file to review the application deployment configuration
 1. Notice the redirect to `https://$YOUR_SERVICE_ENDPOINT/api/random`
 
 ## Return to Workshop Respository
-[Fortune Teller Workshop](https://github.com/msathe-tech/fortune-teller)
+[Fortune Teller Workshop](https://github.com/msathe-tech/fortune-teller#lab5-implement-a-gateway)
 
 ## Authors
 * **Bernard Park** - [Github](https://github.com/bernardpark)
