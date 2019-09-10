@@ -92,18 +92,18 @@ One thing to note is that the Config Server service needs to be created with par
 # View available services
 cf marketplace
 # View service details
-cf marketplace -s $SERVICE_NAME
+cf marketplace -s $SERVICE_TYPE
 # Create the service (config server)
-cf create-service $SERVICE_NAME $SERVICE_PLAN $YOUR_SERVICE_NAME -c '{"git": { "uri": "https://github.com/$GITHUB/$REMOTE_CONFIG_REPO", "label": "$BRANCH" } }'
+cf create-service $SERVICE_TYPE $SERVICE_PLAN $YOUR_SERVICE_NAME -c '{"git": { "uri": "https://github.com/$GITHUB/$REMOTE_CONFIG_REPO", "label": "$BRANCH" } }'
 # Create the service (all others)
-cf create-service $SERVICE_NAME $SERVICE_PLAN $YOUR_SERVICE_NAME
+cf create-service $SERVICE_TYPE $SERVICE_PLAN $YOUR_SERVICE_NAME
 ```
 1. Draft your `manifest.yml` in the root directory. Note that the variables, enclosed in double parentheses (()), will contain the key of each variable. We will create the variable file shortly.
 
 ```
 ---
 applications:
-- name: ((app_name))
+- name: ((app_prefix))-fortune-gateway
   memory: 1024M
   path: ./target/fortune-teller-gateway-0.0.1-SNAPSHOT.jar
   instances: 1
@@ -118,7 +118,7 @@ applications:
 1. Draft your `vars.yml` file in the root directory. Notice that the keys to all variables are referenced in the `manifest.yml` file we just created. You will also need to know your PCF API endpoint. You can find this by visiting Apps Manager -> Tools -> `Login to the CLI` box, or by running the command `cf api | head -1 | cut -c 25-`.
 
 ```
-app_name: $YOUR_APP_NAME
+app_prefix: $YOUR_APP_PREFIX
 config_server: $YOUR_CONFIG_SERVICE_NAME
 service_registry: $YOUR_SERVICE_REGISTRY_NAME
 cloud_bus: $YOUR_CLOUD_BUS_NAME
@@ -128,7 +128,7 @@ cf_trust_certs: $YOUR_PCF_API_ENDPOINT
 1. Push your application.
 
 ```
-cf push
+cf push --vars-file vars.yml
 ```
 
 Examine the manifest.yml file to review the application deployment configurations and service bindings.
